@@ -15,6 +15,7 @@ class App extends React.Component {
       isFetchingJoke: false
     };
     this.onTellJoke = this.onTellJoke.bind(this);
+
     this.onSearchChange = this.onSearchChange.bind(this);
 
     this.onSearchSubmit = this.onSearchSubmit.bind(this);
