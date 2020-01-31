@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 // import App from "./App";
-//
+// name changed
 import "./styles.css";
 
 class App extends React.Component {
