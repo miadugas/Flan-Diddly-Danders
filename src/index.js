@@ -10,19 +10,23 @@ class App extends React.Component {
 
     //typically dont modify this directly
     this.state = {
+      searchTerm: "",
       jokes: [],
       isFetchingJoke: false
     };
     this.onTellJoke = this.onTellJoke.bind(this);
+    this.onSearchChange = this.onSearchChange.bind(this);
+    this.onSearchSubmit = this.onSearchSubmit.bind(this);
   }
 
-  componentDidMount() {
-    this.searchJokes();
-  }
+  // componentDidMount() {
+  //   this.searchJokes();
+  // }
 
   searchJokes() {
     this.setState({ isFetchingJoke: true });
-    fetch("https://icanhazdadjoke.com/search", {
+
+    fetch(`https://icanhazdadjoke.com/search?term=${this.state.searchTerm}`, {
       method: "GET",
       headers: {
         Accept: "application/json"
@@ -46,12 +50,27 @@ class App extends React.Component {
     this.searchJokes();
   }
 
+  onSearchChange(event) {
+    this.setState({ searchTerm: event.target.value });
+  }
+
+  onSearchSubmit(event) {
+    event.preventDefault();
+    this.searchJokes();
+    // console.log("Form Submitted");
+  }
+
   render() {
     return (
       <div>
-        <form>
-          <input type="text" placeholder="Enter search term..." />
+        <form onSubmit={this.onSearchSubmit}>
+          <input
+            type="text"
+            placeholder="Enter search term..."
+            onChange={this.onSearchChange}
+          />
           <button>Search</button>
+
           <button
             onClick={this.onTellJoke}
             disabled={this.state.isFetchingJoke}
@@ -62,6 +81,7 @@ class App extends React.Component {
 
         <p>{this.state.jokes.toString()}</p>
         {/* <p>isFetchingJoke: {this.state.isFetchingJoke.toString()}</p> */}
+        <p>search term: {this.state.searchTerm}</p>
       </div>
     );
   }
@@ -71,8 +91,8 @@ const rootElement = document.getElementById("root");
 ReactDOM.render(<App />, rootElement);
 
 // TO DO LIST
-//1. Call Search joke endpoint, and store results
-//2. Save search input's value in app state
+// DONE - 1. Call Search joke endpoint, and store results
+// DONE- 2. Save search input's value in app state
 //3. Trigger search on form submission
 //4. render the search results
 //5. hook up the I'm feeling lucky button
