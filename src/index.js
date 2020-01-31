@@ -15,17 +15,23 @@ class App extends React.Component {
       isFetchingJoke: false
     };
     this.onTellJoke = this.onTellJoke.bind(this);
-    this.onSearchChange = this.onSearchChange.bind(this);
+
+    this.onSearchSubmit = this.onSearchSubmit.bind(this);
+
   }
 
-  componentDidMount() {
-    this.searchJokes();
-  }
+  // componentDidMount() {
+  //   this.searchJokes();
+  // }
 
   searchJokes() {
     this.setState({ isFetchingJoke: true });
 
+
+    fetch(`https://icanhazdadjoke.com/search?term=${this.state.searchTerm}`, {
+
     fetch("https://icanhazdadjoke.com/search", {
+
       method: "GET",
       headers: {
         Accept: "application/json"
@@ -53,10 +59,23 @@ class App extends React.Component {
     this.setState({ searchTerm: event.target.value });
   }
 
+
+  onSearchSubmit(event) {
+    event.preventDefault();
+    this.searchJokes();
+    // console.log("Form Submitted");
+  }
+
+  render() {
+    return (
+      <div>
+        <form onSubmit={this.onSearchSubmit}>
+
   render() {
     return (
       <div>
         <form>
+
           <input
             type="text"
             placeholder="Enter search term..."
