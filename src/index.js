@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 // import App from "./App";
-// name changed
+
 import "./styles.css";
 
 class App extends React.Component {
@@ -15,8 +15,9 @@ class App extends React.Component {
       isFetchingJoke: false
     };
     this.onTellJoke = this.onTellJoke.bind(this);
-    this.onSearchChange = this.onSearchChange.bind(this);
+
     this.onSearchSubmit = this.onSearchSubmit.bind(this);
+
   }
 
   // componentDidMount() {
@@ -26,7 +27,11 @@ class App extends React.Component {
   searchJokes() {
     this.setState({ isFetchingJoke: true });
 
+
     fetch(`https://icanhazdadjoke.com/search?term=${this.state.searchTerm}`, {
+
+    fetch("https://icanhazdadjoke.com/search", {
+
       method: "GET",
       headers: {
         Accept: "application/json"
@@ -54,6 +59,7 @@ class App extends React.Component {
     this.setState({ searchTerm: event.target.value });
   }
 
+
   onSearchSubmit(event) {
     event.preventDefault();
     this.searchJokes();
@@ -64,6 +70,12 @@ class App extends React.Component {
     return (
       <div>
         <form onSubmit={this.onSearchSubmit}>
+
+  render() {
+    return (
+      <div>
+        <form>
+
           <input
             type="text"
             placeholder="Enter search term..."
@@ -85,6 +97,23 @@ class App extends React.Component {
       </div>
     );
   }
+
+import "./styles.css";
+
+function App(props) {
+const onTellJoke = () => {
+  fetch ("https://icanhazdadjoke.com/", {
+  method:"GET",
+  headers: {
+    Accept: "application/json"
+}
+  })
+.then(response => response.json())
+.then (json => console.log(json))
+};
+
+  return <button onClick={onTellJoke}>Tell me a joke</button>;
+
 }
 
 const rootElement = document.getElementById("root");
