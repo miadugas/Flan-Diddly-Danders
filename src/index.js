@@ -122,7 +122,7 @@ ReactDOM.render(<App />, rootElement);
 // TO DO LIST
 // DONE - 1. Call Search joke endpoint, and store results
 // DONE- 2. Save search input's value in app state
-//3. Trigger search on form submission
+// DONE - 3. Trigger search on form submission
 //4. render the search results
 //5. hook up the I'm feeling lucky button
 //6. create search form component
