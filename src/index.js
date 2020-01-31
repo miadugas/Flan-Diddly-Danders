@@ -16,16 +16,21 @@ class App extends React.Component {
     };
     this.onTellJoke = this.onTellJoke.bind(this);
     this.onSearchChange = this.onSearchChange.bind(this);
+
+    this.onSearchSubmit = this.onSearchSubmit.bind(this);
+
   }
 
-  componentDidMount() {
-    this.searchJokes();
-  }
+  // componentDidMount() {
+  //   this.searchJokes();
+  // }
 
   searchJokes() {
     this.setState({ isFetchingJoke: true });
 
-    fetch("https://icanhazdadjoke.com/search", {
+
+    fetch(`https://icanhazdadjoke.com/search?term=${this.state.searchTerm}`, {
+
       method: "GET",
       headers: {
         Accept: "application/json"
@@ -53,10 +58,23 @@ class App extends React.Component {
     this.setState({ searchTerm: event.target.value });
   }
 
+
+  onSearchSubmit(event) {
+    event.preventDefault();
+    this.searchJokes();
+    // console.log("Form Submitted");
+  }
+
+  render() {
+    return (
+      <div>
+        <form onSubmit={this.onSearchSubmit}>
+
   render() {
     return (
       <div>
         <form>
+
           <input
             type="text"
             placeholder="Enter search term..."
@@ -103,7 +121,7 @@ ReactDOM.render(<App />, rootElement);
 // TO DO LIST
 // DONE - 1. Call Search joke endpoint, and store results
 // DONE- 2. Save search input's value in app state
-//3. Trigger search on form submission
+// DONE - 3. Trigger search on form submission
 //4. render the search results
 //5. hook up the I'm feeling lucky button
 //6. create search form component
