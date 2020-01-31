@@ -4,6 +4,7 @@ import ReactDOM from "react-dom";
 
 import "./styles.css";
 
+
 class App extends React.Component {
 
 joke = null;
@@ -16,6 +17,10 @@ this.onTellJoke = this.onTellJoke.bind(this);
 }
 
 onTellJoke () {
+=======
+function App(props) {
+const onTellJoke = () => {
+
   fetch ("https://icanhazdadjoke.com/", {
   method:"GET",
   headers: {
@@ -23,6 +28,7 @@ onTellJoke () {
 }
   })
 .then(response => response.json())
+
 .then (json => {
   this.joke = json.joke;
   console.log("joke", this.joke);
@@ -40,6 +46,12 @@ console.log("-----RENDER-----");
     </div>
   );
 }
+
+.then (json => console.log(json))
+};
+
+  return <button onClick={onTellJoke}>Tell me a joke</button>;
+
 }
 
 const rootElement = document.getElementById("root");
