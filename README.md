@@ -9,10 +9,12 @@ In this app I am trying some React concepts with Codesandbox, an online IDE for 
 - Creating Dumb/Stateless Components
 
 
-Flan-Diddly-Danders is a Google clone for dad jokes and only dad jokes; its clean, corny humor. Enter your dad joke topic and get the top 5 dad joke results for that search term, or enter your search term & press the "I'm feeling funny" button for a single dad joke on topic.
+Flan-Diddly-Danders is a Google clone for dad jokes and only dad jokes; its clean, corny humor. Enter your dad joke topic and get the top 5 dad joke results for that search term, or enter your search term & press the "I'm feeling funny" button for a single dad joke on topic. 
 
 I hope you enjoy, 
 -Mia
+
+P.S. Plus its my dads Birthday in a few days (love you dad) :D
 
 
 
