@@ -1,5 +1,6 @@
 # Flan-Diddly-Danders
 
+
 In this app I am trying some React concepts with Codesandbox, an online IDE for more rapid deployment.
 
 - Elements, Components and more ES6.
@@ -20,3 +21,4 @@ P.S. Plus its my dads Birthday in a few days (love you dad) :D
 
 
 ![Image of Flan-Diddly-Danders](https://github.com/miadugas/Flan-Diddly-Danders/blob/master/giphy.GIF)
+
