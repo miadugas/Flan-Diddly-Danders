@@ -2,10 +2,10 @@
 
 In this app I am trying some React concepts with Codesandbox, an online IDE for more rapid deployment.
 
-- Elements and Components
+- Elements and Components and more ES6.
 - Working with JSX in more detail
 - State and Lifecycle when to use and when to not manipualte
-- Working with Forms. Since React handes forms differently then its HTML   counterpart.
+- Working with Forms. Since React handes forms differently then its HTML   counterpart getting a handle on this concept is crutial.
 - Creating Dumb/Stateless Components
 
 
