@@ -24,7 +24,7 @@ class App extends React.Component {
   //   this.searchJokes();
   // }
 
-  searchJokes(limit = 20) {
+  searchJokes(limit = 5) {
     this.setState({ isFetchingJokes: true });
 
     fetch(
