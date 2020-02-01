@@ -1,7 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import SearchForm from "./SearchForm";
 // import App from "./App";
-
+// name changed
 import "./styles.css";
 
 class App extends React.Component {
@@ -12,108 +13,80 @@ class App extends React.Component {
     this.state = {
       searchTerm: "",
       jokes: [],
-      isFetchingJoke: false
+      isFetchingJokes: false
     };
-    this.onTellJoke = this.onTellJoke.bind(this);
 
     this.onSearchChange = this.onSearchChange.bind(this);
-
-    this.onSearchSubmit = this.onSearchSubmit.bind(this);
-
+    this.searchJokes = this.searchJokes.bind(this);
   }
 
   // componentDidMount() {
   //   this.searchJokes();
   // }
 
-  searchJokes() {
-    this.setState({ isFetchingJoke: true });
+  searchJokes(limit = 20) {
+    this.setState({ isFetchingJokes: true });
 
-
-    fetch(`https://icanhazdadjoke.com/search?term=${this.state.searchTerm}`, {
-
-      method: "GET",
-      headers: {
-        Accept: "application/json"
+    fetch(
+      `https://icanhazdadjoke.com/search?term=${
+        this.state.searchTerm
+      }&limit=${limit}`,
+      {
+        method: "GET",
+        headers: {
+          Accept: "application/json"
+        }
       }
-    })
+    )
       .then(response => response.json())
       .then(json => {
         const jokes = json.results;
+        console.log("jokes", jokes);
         this.setState({
           jokes,
-          isFetchingJoke: false
+          isFetchingJokes: false
         });
         //set.state usually a request not a command
-        //this.setState({ joke: json.joke, isFetchingJoke: false });
+        //this.setState({ joke: json.joke, isFetchingJokes: false });
         // console.log("joke", this.joke);
-        console.log("jokes", jokes);
       });
   }
 
-  onTellJoke() {
-    this.searchJokes();
+  onSearchChange(value) {
+    this.setState({ searchTerm: value });
   }
 
-  onSearchChange(event) {
-    this.setState({ searchTerm: event.target.value });
-  }
-
-
-  onSearchSubmit(event) {
-    event.preventDefault();
-    this.searchJokes();
-    // console.log("Form Submitted");
-  }
-
-  render() {
+  // Breaking my rendering up into smaller chuncks
+  renderJokes() {
     return (
-      <div>
-        <form onSubmit={this.onSearchSubmit}>
-
-  render() {
-    return (
-      <div>
-        <form>
-
-          <input
-            type="text"
-            placeholder="Enter search term..."
-            onChange={this.onSearchChange}
-          />
-          <button>Search</button>
-
-          <button
-            onClick={this.onTellJoke}
-            disabled={this.state.isFetchingJoke}
-          >
-            Tell me a joke
-          </button>
-        </form>
-
-        <p>{this.state.jokes.toString()}</p>
-        {/* <p>isFetchingJoke: {this.state.isFetchingJoke.toString()}</p> */}
-        <p>search term: {this.state.searchTerm}</p>
-      </div>
+      <ul className="jokes-list">
+        {this.state.jokes.map(item => (
+          <li key={item.id}>{item.joke}</li>
+        ))}
+      </ul>
     );
   }
 
-import "./styles.css";
+  render() {
+    return (
+      <div className="App">
+        <img className="logo" alt="nedlogo" src="./img/flanders.jpg" />
+        <SearchForm
+          // all data referances handled in the SearchForm.js
+          onFormSubmit={this.searchJokes}
+          onSearchValueChange={this.onSearchChange}
+          isSearching={this.state.isFetchingJokes}
+          onSingleSearchClick={() => this.searchJokes(1)}
+        />
 
-function App(props) {
-const onTellJoke = () => {
-  fetch ("https://icanhazdadjoke.com/", {
-  method:"GET",
-  headers: {
-    Accept: "application/json"
-}
-  })
-.then(response => response.json())
-.then (json => console.log(json))
-};
+        {this.state.isFetchingJokes
+          ? "searching for a joke..."
+          : this.renderJokes()}
 
-  return <button onClick={onTellJoke}>Tell me a joke</button>;
-
+        {/* <p>isFetchingJokes: {this.state.isFetchingJokes.toString()}</p> */}
+      </div>
+    );
+  }
 }
 
 const rootElement = document.getElementById("root");
@@ -123,8 +96,8 @@ ReactDOM.render(<App />, rootElement);
 // DONE - 1. Call Search joke endpoint, and store results
 // DONE- 2. Save search input's value in app state
 // DONE - 3. Trigger search on form submission
-//4. render the search results
-//5. hook up the I'm feeling lucky button
-//6. create search form component
-//7. refactoring & clean up
+// DONE - 4. render the search results
+// DONE -  5. hook up the I'm feeling lucky button
+// DONE -  6. create search form component
+// DONE -   7. refactoring & clean up
 //8. add styling
